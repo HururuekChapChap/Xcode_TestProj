@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Tinder_Like_Swip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FPu-5a-8uX">
+                                <rect key="frame" x="171.5" y="433" width="71" height="30"/>
+                                <state key="normal" title="Next Page"/>
+                                <connections>
+                                    <segue destination="CGJ-4g-XPX" kind="show" id="LLv-ww-f0K"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="FPu-5a-8uX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Eid-pm-UcD"/>
+                            <constraint firstItem="FPu-5a-8uX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hEn-ZK-xDQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="116"/>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="tbz-JG-z9Y">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="CGJ-4g-XPX" customClass="SecondViewController" customModule="Tinder_Like_Swip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="05Q-mu-dsA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXT-Kf-eQa">
+                                <rect key="frame" x="167.5" y="74" width="79" height="52"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
+                                <state key="normal" title="reset">
+                                    <color key="titleColor" red="0.99149912600000001" green="0.47060042619999998" blue="0.61228579279999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetBtn:" destination="CGJ-4g-XPX" eventType="touchUpInside" id="pid-90-XtI"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJU-GM-SUe">
+                                <rect key="frame" x="32" y="278" width="350" height="350"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-1024" translatesAutoresizingMaskIntoConstraints="NO" id="KM0-gc-JRo">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moon.stars.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nGr-vT-Fhp">
+                                        <rect key="frame" x="75" y="74" width="200" height="199.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="0gd-pi-kY5"/>
+                                            <constraint firstAttribute="width" secondItem="nGr-vT-Fhp" secondAttribute="height" multiplier="1:1" id="J5a-cP-ClY"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="KM0-gc-JRo" firstAttribute="leading" secondItem="jJU-GM-SUe" secondAttribute="leading" id="8Fs-Qr-Gnc"/>
+                                    <constraint firstItem="nGr-vT-Fhp" firstAttribute="centerX" secondItem="jJU-GM-SUe" secondAttribute="centerX" id="FlP-0T-mZr"/>
+                                    <constraint firstAttribute="width" secondItem="jJU-GM-SUe" secondAttribute="height" multiplier="1:1" id="Hng-dr-azJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="KM0-gc-JRo" secondAttribute="bottom" id="JHH-Eb-ItL"/>
+                                    <constraint firstItem="nGr-vT-Fhp" firstAttribute="centerY" secondItem="jJU-GM-SUe" secondAttribute="centerY" id="Lu4-mT-SHm"/>
+                                    <constraint firstAttribute="trailing" secondItem="KM0-gc-JRo" secondAttribute="trailing" id="gdT-8z-shJ"/>
+                                    <constraint firstItem="KM0-gc-JRo" firstAttribute="top" secondItem="jJU-GM-SUe" secondAttribute="top" id="kvE-hE-hSD"/>
+                                    <constraint firstAttribute="width" constant="350" id="mUK-4X-oLA"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Isc-7x-0TQ" appends="YES" id="9BI-Oo-tg7"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jJU-GM-SUe" firstAttribute="centerY" secondItem="avL-v0-MJl" secondAttribute="centerY" id="VWB-AE-jgU"/>
+                            <constraint firstItem="UXT-Kf-eQa" firstAttribute="top" secondItem="avL-v0-MJl" secondAttribute="top" constant="30" id="WpU-8y-ZeO"/>
+                            <constraint firstItem="jJU-GM-SUe" firstAttribute="centerX" secondItem="avL-v0-MJl" secondAttribute="centerX" id="lJn-2V-VXE"/>
+                            <constraint firstItem="UXT-Kf-eQa" firstAttribute="centerX" secondItem="avL-v0-MJl" secondAttribute="centerX" id="w8s-6A-v9a"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="avL-v0-MJl"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="k3D-f5-7S6"/>
+                    <connections>
+                        <outlet property="CardView" destination="jJU-GM-SUe" id="AeJ-VJ-B3e"/>
+                        <outlet property="RateImageView" destination="nGr-vT-Fhp" id="br8-t8-yok"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q0o-QD-aao" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Isc-7x-0TQ">
+                    <connections>
+                        <action selector="panGesture:" destination="CGJ-4g-XPX" id="mij-XA-GpH"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="982.60869565217399" y="115.84821428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon-1024" width="512" height="512"/>
+        <image name="moon.stars.fill" catalog="system" width="128" height="124"/>
+    </resources>
+</document>
