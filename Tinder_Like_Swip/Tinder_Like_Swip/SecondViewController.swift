@@ -77,4 +77,11 @@ class SecondViewController: UIViewController {
         
     }
 
+    @IBAction func SwipeLeft(_ sender: UISwipeGestureRecognizer) {
+        
+        if sender.direction == .left {
+            dismiss(animated: true, completion: nil)
+        }
+        
+    }
 }
