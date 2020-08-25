@@ -15,6 +15,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
+        print("Swipe Right")
+        
+        performSegue(withIdentifier: "NextPage", sender: nil)
+    }
+    
 }
 

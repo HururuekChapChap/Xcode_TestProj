@@ -19,19 +19,28 @@
                                 <rect key="frame" x="171.5" y="433" width="71" height="30"/>
                                 <state key="normal" title="Next Page"/>
                                 <connections>
-                                    <segue destination="CGJ-4g-XPX" kind="show" id="LLv-ww-f0K"/>
+                                    <segue destination="CGJ-4g-XPX" kind="show" identifier="NextPage" id="LLv-ww-f0K"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="FPu-5a-8uX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Eid-pm-UcD"/>
                             <constraint firstItem="FPu-5a-8uX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hEn-ZK-xDQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1NP-oL-xFo" appends="YES" id="2FN-Oh-Nh8"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="1NP-oL-xFo">
+                    <connections>
+                        <action selector="swipeRight:" destination="BYZ-38-t0r" id="Hc4-41-7NM"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="139" y="116"/>
         </scene>
@@ -86,6 +95,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="jJU-GM-SUe" firstAttribute="centerY" secondItem="avL-v0-MJl" secondAttribute="centerY" id="VWB-AE-jgU"/>
                             <constraint firstItem="UXT-Kf-eQa" firstAttribute="top" secondItem="avL-v0-MJl" secondAttribute="top" constant="30" id="WpU-8y-ZeO"/>
@@ -93,6 +103,9 @@
                             <constraint firstItem="UXT-Kf-eQa" firstAttribute="centerX" secondItem="avL-v0-MJl" secondAttribute="centerX" id="w8s-6A-v9a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="avL-v0-MJl"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="PIT-7U-yg4" appends="YES" id="ewO-0v-UoB"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="k3D-f5-7S6"/>
                     <connections>
@@ -106,6 +119,11 @@
                         <action selector="panGesture:" destination="CGJ-4g-XPX" id="mij-XA-GpH"/>
                     </connections>
                 </panGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="PIT-7U-yg4">
+                    <connections>
+                        <action selector="SwipeLeft:" destination="CGJ-4g-XPX" id="V9b-yR-u7t"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="982.60869565217399" y="115.84821428571428"/>
         </scene>
