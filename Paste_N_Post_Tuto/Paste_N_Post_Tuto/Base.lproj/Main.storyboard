@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Paste_N_Post_Tuto" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="V36-yn-5oe">
+                                <rect key="frame" x="10" y="44" width="394" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HS8-Qe-Sbr">
+                                        <rect key="frame" x="0.0" y="0.0" width="192" height="100"/>
+                                        <color key="backgroundColor" red="0.40090203289999998" green="0.81591933969999997" blue="0.59801030160000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Copy"/>
+                                        <connections>
+                                            <action selector="CopyText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hK0-uV-U5U"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaQ-SB-0fG">
+                                        <rect key="frame" x="202" y="0.0" width="192" height="100"/>
+                                        <color key="backgroundColor" red="0.40090203289999998" green="0.81591933969999997" blue="0.59801030160000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Paste"/>
+                                        <connections>
+                                            <action selector="PasteText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SgF-Qa-1xc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="dsc-UJ-aco"/>
+                                </constraints>
+                            </stackView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aaC-08-cWf">
+                                <rect key="frame" x="0.0" y="344" width="414" height="552"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                            </textView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="TlX-Os-WLQ">
+                                <rect key="frame" x="10" y="154" width="394" height="180"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.17691090700000001" green="0.192129463" blue="0.21648269889999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="TlX-Os-WLQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="5Qx-v0-l0S"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TlX-Os-WLQ" secondAttribute="trailing" constant="10" id="98w-jw-TdA"/>
+                            <constraint firstItem="aaC-08-cWf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="D4L-Mk-V8b"/>
+                            <constraint firstItem="V36-yn-5oe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="N3n-cK-KGt"/>
+                            <constraint firstAttribute="bottom" secondItem="aaC-08-cWf" secondAttribute="bottom" id="PdI-Tz-1Wj"/>
+                            <constraint firstItem="V36-yn-5oe" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-10" id="QXL-b5-Hn2"/>
+                            <constraint firstItem="TlX-Os-WLQ" firstAttribute="top" secondItem="V36-yn-5oe" secondAttribute="bottom" constant="10" id="RsS-FP-70C"/>
+                            <constraint firstItem="V36-yn-5oe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="XUH-pM-3TE"/>
+                            <constraint firstItem="aaC-08-cWf" firstAttribute="top" secondItem="TlX-Os-WLQ" secondAttribute="bottom" constant="10" id="hmZ-DH-GiK"/>
+                            <constraint firstItem="aaC-08-cWf" firstAttribute="top" secondItem="V36-yn-5oe" secondAttribute="bottom" constant="200" id="ijb-cA-hyA"/>
+                            <constraint firstItem="aaC-08-cWf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="k0E-XG-87P"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="ImageView" destination="TlX-Os-WLQ" id="WHL-jX-iJ5"/>
+                        <outlet property="textField" destination="aaC-08-cWf" id="uLB-bU-VIv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="empty" width="200" height="200"/>
+    </resources>
+</document>
