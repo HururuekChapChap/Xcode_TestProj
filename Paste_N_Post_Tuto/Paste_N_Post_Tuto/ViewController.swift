@@ -11,8 +11,8 @@ import UIKit
 class ViewController: UIViewController{
 
     @IBOutlet weak var textField: UITextView!
-    
     @IBOutlet weak var ImageView: UIImageView!
+    
     let pasteBoard = UIPasteboard.general
     
     override func viewDidLoad() {
