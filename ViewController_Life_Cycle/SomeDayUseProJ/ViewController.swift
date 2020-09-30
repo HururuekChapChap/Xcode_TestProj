@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("===========================")
         print("첫 ViewDidLoad 호출")
         // Do any additional setup after loading the view.
     }
@@ -54,6 +55,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("첫 viewDidAppear 호출")
+        print("===========================")
     }
     
     
