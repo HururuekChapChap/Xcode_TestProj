@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mXB-4b-rBS">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="GreenViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tnD-D3-W8N"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="852" y="806"/>
+        </scene>
+        <!--Red View Controller-->
+        <scene sceneID="fX8-8V-ZXp">
+            <objects>
+                <viewController storyboardIdentifier="RedViewController" id="Pvn-8c-O7f" customClass="RedViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wre-LO-o1N">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="hqD-Vi-zR8"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kp1-qV-iea" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1623" y="800"/>
+        </scene>
+        <!--Blue View Controller-->
+        <scene sceneID="EAs-hY-UUd">
+            <objects>
+                <viewController storyboardIdentifier="BlueViewController" id="eeE-9a-dpe" customClass="BlueViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="arH-U9-iYW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="A6J-c9-ejD"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gwT-31-M2q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2371" y="800"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="yEc-2J-ULv">
+            <objects>
+                <viewController id="mXB-4b-rBS" customClass="MainViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qid-2b-NF1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1yz-kL-VhD">
+                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
+                                <connections>
+                                    <segue destination="a6q-yA-rW2" kind="embed" identifier="PageViewController" id="HFA-s5-cFr"/>
+                                </connections>
+                            </containerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1Et-9b-red">
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdu-YP-0xh">
+                                        <rect key="frame" x="0.0" y="0.0" width="138" height="56"/>
+                                        <state key="normal" title="first"/>
+                                        <connections>
+                                            <action selector="firstBtn:" destination="mXB-4b-rBS" eventType="touchUpInside" id="MtU-wT-z6x"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJX-0L-Nyz">
+                                        <rect key="frame" x="138" y="0.0" width="138" height="56"/>
+                                        <state key="normal" title="second"/>
+                                        <connections>
+                                            <action selector="secondeBtn:" destination="mXB-4b-rBS" eventType="touchUpInside" id="oWs-Gd-IqD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5R-xS-uRd">
+                                        <rect key="frame" x="276" y="0.0" width="138" height="56"/>
+                                        <state key="normal" title="third"/>
+                                        <connections>
+                                            <action selector="thirdBtn:" destination="mXB-4b-rBS" eventType="touchUpInside" id="FVg-Gg-dFW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1Et-9b-red" firstAttribute="top" secondItem="xov-Xj-qP4" secondAttribute="top" id="0Wa-bV-lfZ"/>
+                            <constraint firstItem="1yz-kL-VhD" firstAttribute="top" secondItem="qid-2b-NF1" secondAttribute="top" constant="100" id="4JL-ww-roq"/>
+                            <constraint firstItem="1yz-kL-VhD" firstAttribute="top" secondItem="1Et-9b-red" secondAttribute="bottom" id="IdK-dD-ZUI"/>
+                            <constraint firstAttribute="bottom" secondItem="1yz-kL-VhD" secondAttribute="bottom" id="Uw0-kv-U8m"/>
+                            <constraint firstItem="1Et-9b-red" firstAttribute="trailing" secondItem="xov-Xj-qP4" secondAttribute="trailing" id="aN2-L8-8aH"/>
+                            <constraint firstItem="1yz-kL-VhD" firstAttribute="leading" secondItem="xov-Xj-qP4" secondAttribute="leading" id="ee3-rO-fzE"/>
+                            <constraint firstItem="1Et-9b-red" firstAttribute="leading" secondItem="xov-Xj-qP4" secondAttribute="leading" id="x6J-Nx-AgC"/>
+                            <constraint firstItem="1yz-kL-VhD" firstAttribute="trailing" secondItem="xov-Xj-qP4" secondAttribute="trailing" id="ySU-1v-jaG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xov-Xj-qP4"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstBtn" destination="rdu-YP-0xh" id="gBl-B5-Jbl"/>
+                        <outlet property="secondBtn" destination="bJX-0L-Nyz" id="Vl2-K0-6Xd"/>
+                        <outlet property="thirdBtn" destination="I5R-xS-uRd" id="PmS-gf-f60"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bd0-kg-yBl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-507" y="106"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="fnv-Gr-E5B">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="a6q-yA-rW2" customClass="PageViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="CdI-4Z-wmd"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Q3-sz-7hj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853" y="107"/>
+        </scene>
+    </scenes>
+</document>
