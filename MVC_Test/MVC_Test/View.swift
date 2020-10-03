@@ -30,7 +30,7 @@ class View: UIView {
     func changeLabel(_ text : String){
         print(text)
         label.text = text
-//        setNeedsLayout()
+        setNeedsLayout()
     }
     
     override func layoutSubviews() {
