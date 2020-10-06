@@ -35,7 +35,7 @@ class View: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        print("layoutSubviews")
+        print("layoutSubviews") //업데이트 사이클이 마치고나서 호출 되는 거 같다
         label.sizeToFit()
         label.center = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2)
         
