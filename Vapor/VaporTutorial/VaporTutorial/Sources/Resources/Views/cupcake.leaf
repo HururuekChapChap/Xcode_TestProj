@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CupeCake Info</title>
+  </head>
+  <body>
+    <h1>#(name) : CupeCake Here</h1>
+    
+    <ul>
+        #for(item in items):
+        
+            <li>
+                #(item.name)
+                
+                #if(item.price < 2):
+                <p> #(item.price) is cheap</p>
+                #elseif(item.price > 3):
+                <p> #(item.price) is 안좋다</p>
+                #else:
+                <p> #(item.price) is good</p>
+                #endif
+                
+                #if(item.description == "Good"):
+                <p> good~ </p>
+                #endif
+            
+            </li>
+            
+        #endfor
+    </ul>
+  </body>
+</html>
