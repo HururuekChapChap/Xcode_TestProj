@@ -43,5 +43,22 @@ func routes(_ app: Application) throws {
         
         return "Error"
     }
+    
+    app.post("test"){ req -> EventLoopFuture<TestModel> in
+        
+        let exist = try req.content.decode(TestModel.self)
+            
+    
+        return exist.create(on: req.db).map { (result) -> TestModel in
+            return exist
+        }
+        
+        
+    }
+    
+    app.get("testAll"){ req -> EventLoopFuture<[TestModel]> in
+        return TestModel.query(on: req.db).all()
+    }
+    
 
 }
