@@ -1,5 +1,7 @@
 import Vapor
 import Leaf
+import Fluent
+import FluentPostgresDriver
 
 // configures your application
 public func configure(_ app: Application) throws {
@@ -8,6 +10,13 @@ public func configure(_ app: Application) throws {
     app.directory.publicDirectory = "/Volumes/T7/Xcode_TestProj/Vapor/VaporTutorial/VaporTutorial/Public"
      app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
+    //configure postgresql - 데이터베이스 등록
+    //host주소 / postgresql의 owner에 해당하는 부분 / 초기 패스워드 "" / 테이블
+    app.databases.use(.postgres(hostname: "localhost", username: "yoontaesoo", password: "", database: "test1"), as: .psql)
+    
+    //테이블 생성
+    app.migrations.add(CreateTestModel())
+    
     //register Leaf - leaf 등록
     app.views.use(.leaf)
     app.leaf.cache.isEnabled = app.environment.isRelease
