@@ -16,6 +16,8 @@ public func configure(_ app: Application) throws {
     
     //테이블 생성
     app.migrations.add(CreateTestModel())
+    //테이블 생성
+    app.migrations.add(CreateUserModel())
     
     //register Leaf - leaf 등록
     app.views.use(.leaf)

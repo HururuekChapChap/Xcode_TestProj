@@ -49,4 +49,40 @@ final class TestModel : Model , Content {
     
 }
 
+final class Pet : Fields {
+    
+    @Field(key : "name")
+    var petName : String
+    
+    @Field(key : "type")
+    var petType : String
+    
+    init(){}
+    
+}
+
+enum Status: String, Codable {
+    case pending = "기다리시오"
+    case completed = "완료됨"
+}
+
+final class user : Model, Content {
+    
+    static let schema : String = "user"
+    
+    @ID(key: .id)
+    var id : UUID?
+    
+    @Field(key: "status")
+    var status: String
+    
+    init(){}
+    
+    init(id : UUID? = nil , status : String){
+        self.id = id
+        self.status = status
+    }
+    
+}
+
 
