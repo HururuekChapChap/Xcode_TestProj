@@ -109,5 +109,10 @@ func routes(_ app: Application) throws {
         return "query finish"
     }
     
+    app.get("getMutiple"){ req -> EventLoopFuture<[user]> in
+            
+        return user.query(on: req.db).filter(\.$status == "test").all()
+    }
+    
 
 }
