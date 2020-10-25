@@ -2,26 +2,27 @@
 //  File.swift
 //  
 //
-//  Created by yoon tae soo on 2020/10/15.
+//  Created by yoon tae soo on 2020/10/25.
 //
 
 import Foundation
 import Fluent
 import FluentPostgresDriver
 
-struct CreateUserModel : Migration {
+struct CreateCupCakeModel : Migration {
     
     func prepare(on database: Database) -> EventLoopFuture<Void> {
         
-        database.schema("user")
+        database.schema("CupCake")
             .id()
-            .field("status", .string)
+            .field("name", .string)
+            .field("description", .string)
+            .field("price", .int)
             .create()
     }
     
     func revert(on database: Database) -> EventLoopFuture<Void> {
-        database.schema("user").delete()
+        database.schema("CupCake").delete()
     }
     
 }
-
