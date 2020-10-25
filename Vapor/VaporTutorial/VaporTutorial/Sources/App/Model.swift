@@ -9,14 +9,6 @@ import Foundation
 import Vapor
 import FluentSQLiteDriver
 
-struct CupCake : Content {
-    
-    let id : Int?
-    let name : String
-    let description : String
-    let price : Int
-    
-}
 
 struct Context: Content {
     var name : String
@@ -49,18 +41,6 @@ final class TestModel : Model , Content {
     
 }
 
-final class Pet : Fields {
-    
-    @Field(key : "name")
-    var petName : String
-    
-    @Field(key : "type")
-    var petType : String
-    
-    init(){}
-    
-}
-
 enum Status: String, Codable {
     case pending = "기다리시오"
     case completed = "완료됨"
@@ -82,6 +62,31 @@ final class user : Model, Content {
         self.id = id
         self.status = status
     }
+    
+}
+
+final class CupCake : Model , Content {
+    
+    static let schema: String = "CupCake"
+    
+    @ID(key: .id)
+    var id : UUID?
+    @Field(key: "name")
+    var name : String
+    @Field(key: "description")
+    var description : String
+    @Field(key: "price")
+    var price : Int
+    
+    init(){}
+    
+    init(id : UUID? = nil,name : String , description : String, price : Int){
+        self.id = id
+        self.name = name
+        self.description = description
+        self.price = price
+    }
+    
     
 }
 

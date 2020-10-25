@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,7 +13,7 @@
         #for(item in items):
         
             <li>
-                #(item.name)
+                #(item.name) desciption : #(item.description)
                 
                 #if(item.price < 2):
                 <p> #(item.price) is cheap</p>
@@ -22,11 +23,16 @@
                 <p> #(item.price) is good</p>
                 #endif
                 
-                #if(item.description == "Good"):
-                <p> good~ </p>
-                #endif
-            
             </li>
+            
+        #endfor
+    </ul>
+    
+    
+    <ul>
+        #for(item in users):
+            
+            <li>list #(item.status)</li>
             
         #endfor
     </ul>

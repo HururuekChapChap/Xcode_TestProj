@@ -19,30 +19,63 @@ func routes(_ app: Application) throws {
         return "Hello, world!"
     }
     
-    app.get("cupcake") { (req) -> EventLoopFuture<View> in
-    
-     
-               let context = Context(
-                name : "ChapChap",
-                items: [
-                CupCake(id: 1, name: "Vanila", description: "Good", price: 3),
-                CupCake(id: 2, name: "Cocolate", description: "Not Bad", price: 1),
-                CupCake(id: 3, name: "Cheez", description: "Good", price: 5)
-               ]
-                
-               )
+    app.get("cupcake2") { req -> EventLoopFuture<View> in
         
-        return req.view.render("cupcake", context)
+        
+        struct PassingData : Content {
+            let name : String
+            let items : [CupCake]
+            let users : [user]
+        }
+        
+        let cupcakes = CupCake.query(on: req.db).all()
+        let users = user.query(on: req.db).all()
+        
+        let temp = cupcakes.and(users).flatMap { (cupcake, user) -> EventLoopFuture<View> in
+            let data = PassingData(name: "Hururuek", items: cupcake, users: user)
+            
+            return req.view.render("cupcakeUser", data)
+        }
+        
+        return temp
+    }
+    
+    app.get("cupcake") { (req) -> EventLoopFuture<View> in
+
+        //정렬은 sort로
+        let temp = CupCake.query(on: req.db).sort(\.$price).all().flatMap { (results) -> EventLoopFuture<View> in
+            let context = Context(name: "test", items: results)
+            
+            return req.view.render("cupcake", context)
+        }
+        
+//               let context = Context(
+//                name : "ChapChap",
+//                items: [
+//                CupCake(id: 1, name: "Vanila", description: "Good", price: 3),
+//                CupCake(id: 2, name: "Cocolate", description: "Not Bad", price: 1),
+//                CupCake(id: 3, name: "Cheez", description: "Good", price: 5)
+//               ]
+//
+//               )
+        
+        return temp
         
     }
     
-    app.post("add") { (req) -> String in
+    app.post("add") { (req) -> EventLoopFuture<Response> in
         
         if let cupcake = try? req.content.decode(CupCake.self){
-            return "\(cupcake)"
+        
+            return cupcake.save(on: req.db).map { (result) -> (Response) in
+                return req.redirect(to: "/cupcake")
+            }
         }
         
-        return "Error"
+        let temp = req.eventLoop.future(req.redirect(to: "/"))
+        
+        //go to root page
+        return temp
     }
     
     app.post("test"){ req -> EventLoopFuture<TestModel> in
@@ -62,11 +95,16 @@ func routes(_ app: Application) throws {
     }
     
     //저장하기
-    app.get("testInput"){ req -> EventLoopFuture<user> in
+    app.get("testInput",":input"){ req -> EventLoopFuture<Response> in
         
-        let test = user.init(status: "test")
-        return test.save(on: req.db).map { (result) -> user in
-            return test
+        let input = req.parameters.get("input")
+        
+        let test = user.init(status: input!)
+        return test.save(on: req.db).map { (result) -> Response in
+            
+            let redirect = req.redirect(to: "/")
+            
+            return redirect
         }
     }
     
@@ -79,7 +117,7 @@ func routes(_ app: Application) throws {
         let temp = test.unwrap(or: Abort(.notFound)).map({ (result) -> user in
             
             result.status = "update"
-            result.save(on: req.db)
+            let _ = result.save(on: req.db)
             
             return result
         })
@@ -110,7 +148,7 @@ func routes(_ app: Application) throws {
     }
     
     app.get("getMutiple"){ req -> EventLoopFuture<[user]> in
-            
+        
         return user.query(on: req.db).filter(\.$status == "test").all()
     }
     

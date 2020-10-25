@@ -18,6 +18,8 @@ public func configure(_ app: Application) throws {
     app.migrations.add(CreateTestModel())
     //테이블 생성
     app.migrations.add(CreateUserModel())
+    //테이블 생성
+    app.migrations.add(CreateCupCakeModel())
     
     //register Leaf - leaf 등록
     app.views.use(.leaf)
