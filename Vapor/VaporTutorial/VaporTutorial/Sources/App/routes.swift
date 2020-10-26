@@ -81,14 +81,14 @@ func routes(_ app: Application) throws {
     app.post("test"){ req -> EventLoopFuture<TestModel> in
         
         let exist = try req.content.decode(TestModel.self)
-            
-    
+
         return exist.create(on: req.db).map { (result) -> TestModel in
             return exist
         }
         
         
     }
+    
     
     app.get("testAll"){ req -> EventLoopFuture<[TestModel]> in
         return TestModel.query(on: req.db).all()
@@ -108,6 +108,41 @@ func routes(_ app: Application) throws {
         }
     }
     
+    app.get("check",":input"){ req -> EventLoopFuture<String> in
+            
+        guard let input = req.parameters.get("input") else {throw Abort(.notFound, reason: "nono")}
+        
+        let check = user.query(on: req.db).filter(\.$status == input).first().flatMap { (result) -> EventLoopFuture<String> in
+            
+            guard let _ = result else {
+                
+                let inputData = user.init(status: input)
+                let _ = inputData.save(on: req.db)
+                
+                return req.eventLoop.future("empty")
+            }
+            
+            return req.eventLoop.future("testing")
+        }
+        
+        return check
+    }
+    
+    
+    //
+    app.get("update",":input"){ req -> EventLoopFuture<user> in
+            
+        let input = req.parameters.get("input")
+        
+        return user.query(on: req.db).filter(\.$status == input!).first().unwrap(or: Abort(.notFound)).map { (result) -> (user) in
+            
+            result.status = "update"
+            let _ = result.save(on: req.db)
+            return result
+        }
+        
+    }
+    
     //UUID로 찾기 및 변경
     app.get("find",":id"){ req -> EventLoopFuture<user> in
             
@@ -117,7 +152,7 @@ func routes(_ app: Application) throws {
         let temp = test.unwrap(or: Abort(.notFound)).map({ (result) -> user in
             
             result.status = "update"
-            let _ = result.save(on: req.db)
+            let t = result.save(on: req.db)
             
             return result
         })
