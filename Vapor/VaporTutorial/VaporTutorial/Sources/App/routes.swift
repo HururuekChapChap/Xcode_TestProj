@@ -81,12 +81,6 @@ func routes(_ app: Application) throws {
     app.post("test"){ req -> EventLoopFuture<TestModel> in
         
         let exist = try req.content.decode(TestModel.self)
-<<<<<<< HEAD
-
-=======
-            
-    
->>>>>>> 2ae719f2d7c66691fea2d8b1bcc6d9a63495d912
         return exist.create(on: req.db).map { (result) -> TestModel in
             return exist
         }
@@ -94,10 +88,6 @@ func routes(_ app: Application) throws {
         
     }
     
-<<<<<<< HEAD
-    
-=======
->>>>>>> 2ae719f2d7c66691fea2d8b1bcc6d9a63495d912
     app.get("testAll"){ req -> EventLoopFuture<[TestModel]> in
         return TestModel.query(on: req.db).all()
     }
@@ -116,7 +106,6 @@ func routes(_ app: Application) throws {
         }
     }
     
-<<<<<<< HEAD
     app.get("check",":input"){ req -> EventLoopFuture<String> in
             
         guard let input = req.parameters.get("input") else {throw Abort(.notFound, reason: "nono")}
@@ -151,9 +140,7 @@ func routes(_ app: Application) throws {
         }
         
     }
-    
-=======
->>>>>>> 2ae719f2d7c66691fea2d8b1bcc6d9a63495d912
+
     //UUID로 찾기 및 변경
     app.get("find",":id"){ req -> EventLoopFuture<user> in
             
@@ -163,11 +150,11 @@ func routes(_ app: Application) throws {
         let temp = test.unwrap(or: Abort(.notFound)).map({ (result) -> user in
             
             result.status = "update"
-<<<<<<< HEAD
+
             let t = result.save(on: req.db)
-=======
+
             let _ = result.save(on: req.db)
->>>>>>> 2ae719f2d7c66691fea2d8b1bcc6d9a63495d912
+
             
             return result
         })
