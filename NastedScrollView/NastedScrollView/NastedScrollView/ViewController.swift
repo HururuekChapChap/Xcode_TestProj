@@ -33,9 +33,7 @@ class ViewController: UIViewController {
             vc.viewModel.updateType(type: .two)
             
         }
-        
-        
-        
+
     }
 
 
