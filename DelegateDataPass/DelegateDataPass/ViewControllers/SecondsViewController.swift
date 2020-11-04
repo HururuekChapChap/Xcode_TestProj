@@ -44,9 +44,11 @@ class SecondsViewController: UIViewController {
         tempString = input
     }
     
+    //pass Data to previous ViewController with delegate
     @IBAction func backToVcBtn(_ sender: Any) {
         
         if textField.text != "" && delegate != nil{
+            //send data to protocol
             delegate?.sendDatafunction(input: textField.text!)
             dismiss(animated: true, completion: nil)
         }

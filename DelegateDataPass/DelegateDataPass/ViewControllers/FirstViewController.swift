@@ -18,7 +18,7 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+    //Connect By Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "Segue"{
@@ -33,6 +33,7 @@ class FirstViewController: UIViewController {
         
     }
     
+    //Button that perform segue ans check textField is empty
     @IBAction func sendDatabtn(_ sender: Any) {
         
         if textField.text != ""{
@@ -44,6 +45,7 @@ class FirstViewController: UIViewController {
     
 }
 
+//function which is related with TextField
 extension FirstViewController : UITextFieldDelegate {
     
     func setTextFieldDelegate(){
@@ -57,8 +59,9 @@ extension FirstViewController : UITextFieldDelegate {
     
 }
 
+//perform delegate function
 extension FirstViewController : sendDataDelegate {
-    
+    //change TextLabel
     func sendDatafunction(input: String) {
         titleLabel.text = input
     }
