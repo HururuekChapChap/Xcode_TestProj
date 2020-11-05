@@ -8,11 +8,28 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    
+    let httpRequest = HttpRequest()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Hello world")
+        
+//        let url = httpRequest.makeUrl(url: "http://localhost:8080/hello/vapor")
+//
+//        httpRequest.getInfoData(url: url) { (result) in
+//
+//            switch result {
+//            
+//            case .success(let infoResult):
+//                print(infoResult)
+//            case .failure(let error):
+//                print(error.rawValue)
+//            }
+//
+//        }
+        
         // Do any additional setup after loading the view.
     }
 

@@ -28,8 +28,16 @@ func routes(_ app: Application) throws {
         return "you send \(param)"
     }
     
-    app.get("hello", "vapor") { (req) -> Info in
-        return Info(frameWork: "Vapor", version: 4)
+    app.get("hello", "vapor") { (req) -> [Info] in
+        
+        let items = [
+            Info(frameWork: "Vapor", version: 4),
+            Info(frameWork: "Swift", version: 5),
+            Info(frameWork: "Xcode", version: 12)
+        ]
+        
+        
+        return items
     }
     
     app.post("postRequest") { (req) -> Info in
