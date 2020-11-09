@@ -24,6 +24,20 @@ class ViewController: UIViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let horiY = horiPickerView.frame.origin.y
+        let horiHeight = horiPickerView.frame.height
+
+        horiPickerView.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
+        horiPickerView.frame = CGRect(x: 0, y: horiY, width: view.frame.width, height: horiHeight)
+        horiPickerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        horiPickerView.topAnchor.constraint(equalTo: pickerView.bottomAnchor
+                    ,constant: 30).isActive = true
+    }
+    
     func settingPickerView(){
         
         dataModelPicker = DataModelPickerView(frame: .zero)
@@ -36,12 +50,6 @@ class ViewController: UIViewController {
     }
     
     func settingHoriPickerView(){
-        
-        let horiY = horiPickerView.frame.origin.y
-        
-        horiPickerView.frame = CGRect(x: 0, y: horiY, width: 100, height: 200)
-        
-//        horiPickerView.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
         
         dataModelHoriPicker = DataModelPickerView(frame: .zero)
         
