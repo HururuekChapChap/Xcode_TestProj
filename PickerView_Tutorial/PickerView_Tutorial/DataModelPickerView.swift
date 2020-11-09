@@ -39,20 +39,20 @@ struct Data {
 class DataModelPickerView: UIPickerView {
 
     var dataModels : [DataModel] = []
+    var type : Bool = false
+    var height : CGFloat = 150
     
-    let height : CGFloat = 150
-    
-//    convenience init() {
+//    convenience init(value : Bool) {
 //        self.init(frame: CGRect.zero)
 //              //assign custom vars
 //        dataModels = Data.getData()
 //    }
     
     override init(frame: CGRect) {
-               super.init(frame: frame)
+        super.init(frame: frame)
         dataModels = Data.getData()
-          }
-    
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -109,6 +109,10 @@ extension DataModelPickerView : UIPickerViewDelegate {
         stackview.addArrangedSubview(endLable)
         
         view.addSubview(stackview)
+        
+        if type {
+            view.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
+        }
         
         return view
     }
