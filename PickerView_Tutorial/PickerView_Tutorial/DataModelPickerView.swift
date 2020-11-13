@@ -117,6 +117,10 @@ extension DataModelPickerView : UIPickerViewDelegate {
         return view
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.Name.pickerNoti), object: nil)
+    }
+    
 }
 
 extension DataModelPickerView : UIPickerViewDataSource {
@@ -129,5 +133,9 @@ extension DataModelPickerView : UIPickerViewDataSource {
         return dataModels.count
     }
 
+}
+
+extension Notification.Name {
+    static let pickerNoti = "pickerNoti"
 }
 

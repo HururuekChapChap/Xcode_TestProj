@@ -15,13 +15,29 @@ class ViewController: UIViewController {
     var dataModelPicker : DataModelPickerView!
     var dataModelHoriPicker : DataModelPickerView!
     
+    var token : NSObjectProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     
+      token = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Notification.Name.pickerNoti), object: nil, queue: .main) { (data) in
+            print("Nofi on")
+        }
+        
         settingPickerView()
         settingHoriPickerView()
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let token = token {
+            
+            NotificationCenter.default.removeObserver(token)
+
+        }
     }
     
     override func viewDidLayoutSubviews() {
