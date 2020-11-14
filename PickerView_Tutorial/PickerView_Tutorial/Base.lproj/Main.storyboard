@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,25 +27,34 @@
                                 <rect key="frame" x="47" y="414" width="320" height="220"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vG-Zn-q4V">
+                                <rect key="frame" x="186.5" y="654" width="41.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemIndigoColor"/>
                         <constraints>
                             <constraint firstItem="esO-Xh-nXX" firstAttribute="top" secondItem="hKY-YE-dpb" secondAttribute="bottom" constant="50" id="2UA-hf-ST9"/>
                             <constraint firstItem="esO-Xh-nXX" firstAttribute="height" secondItem="hKY-YE-dpb" secondAttribute="height" id="Pmp-MI-Dcj"/>
+                            <constraint firstItem="8vG-Zn-q4V" firstAttribute="top" secondItem="esO-Xh-nXX" secondAttribute="bottom" constant="20" id="dUB-Wj-52h"/>
                             <constraint firstItem="hKY-YE-dpb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="loP-YM-NrC"/>
+                            <constraint firstItem="8vG-Zn-q4V" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="yaL-e8-yxp"/>
                             <constraint firstItem="esO-Xh-nXX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="z41-Ec-gQz"/>
                             <constraint firstItem="hKY-YE-dpb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zIp-9q-tB5"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="Moneylabel" destination="8vG-Zn-q4V" id="C3f-TE-aFG"/>
                         <outlet property="horiPickerView" destination="esO-Xh-nXX" id="tb5-VW-tc7"/>
                         <outlet property="pickerView" destination="hKY-YE-dpb" id="AAr-gv-rzh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="79"/>
+            <point key="canvasLocation" x="137.68115942028987" y="78.348214285714278"/>
         </scene>
     </scenes>
     <resources>

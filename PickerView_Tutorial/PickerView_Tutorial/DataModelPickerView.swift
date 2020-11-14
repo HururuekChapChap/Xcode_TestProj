@@ -118,6 +118,7 @@ extension DataModelPickerView : UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("selected : \(row)")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notification.Name.pickerNoti), object: nil)
     }
     

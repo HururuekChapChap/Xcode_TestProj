@@ -11,6 +11,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var horiPickerView: UIPickerView!
+    @IBOutlet weak var Moneylabel: UILabel!
     
     var dataModelPicker : DataModelPickerView!
     var dataModelHoriPicker : DataModelPickerView!
@@ -22,7 +23,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     
       token = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Notification.Name.pickerNoti), object: nil, queue: .main) { (data) in
-            print("Nofi on")
+            self.updateLabel()
         }
         
         settingPickerView()
@@ -59,7 +60,8 @@ class ViewController: UIViewController {
         //pickerView의 기능을 dataModelPicker가 대신하겠다!
         pickerView.delegate = dataModelPicker
         pickerView.dataSource = dataModelPicker
-        
+        //row를 선택하게 해준다.
+        pickerView.selectRow(1, inComponent: 0, animated: true)
         
     }
     
@@ -82,6 +84,17 @@ class ViewController: UIViewController {
         
         horiPickerView.delegate = dataModelHoriPicker
         horiPickerView.dataSource = dataModelHoriPicker
+        
+    }
+    
+    func updateLabel(){
+        
+        //인덱스를 반환한다. component는 행의 위치이다. 0 부터 시작한다.
+        let index = pickerView.selectedRow(inComponent: 0)
+        print(index)
+        let datas = Data.getData()
+        
+        Moneylabel.text = datas[index].price
         
     }
 
