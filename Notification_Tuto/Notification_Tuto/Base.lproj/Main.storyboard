@@ -76,6 +76,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="936-ce-6q5" customClass="TabBarViewController" customModule="Notification_Tuto" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eQc-z5-cUl">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -112,27 +113,18 @@
                                     <action selector="notificationBtn:" destination="zH8-rA-oQN" eventType="touchUpInside" id="e1U-1b-czE"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jzv-gd-Y0g">
-                                <rect key="frame" x="181.5" y="266" width="51.5" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" systemColor="systemPinkColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Fud-1c-PTX"/>
                         <color key="backgroundColor" systemColor="systemIndigoColor"/>
                         <constraints>
-                            <constraint firstItem="mzC-ma-cwn" firstAttribute="top" secondItem="jzv-gd-Y0g" secondAttribute="bottom" constant="50" id="77a-3A-OaH"/>
                             <constraint firstItem="mzC-ma-cwn" firstAttribute="centerX" secondItem="9jD-eV-IgQ" secondAttribute="centerX" id="Csk-6j-KAb"/>
                             <constraint firstItem="JJp-Iu-B3G" firstAttribute="top" secondItem="mzC-ma-cwn" secondAttribute="bottom" constant="50" id="WKs-EJ-4FQ"/>
                             <constraint firstItem="JJp-Iu-B3G" firstAttribute="centerX" secondItem="Fud-1c-PTX" secondAttribute="centerX" id="ZIm-ce-0hz"/>
-                            <constraint firstItem="jzv-gd-Y0g" firstAttribute="centerX" secondItem="Fud-1c-PTX" secondAttribute="centerX" id="qhk-q4-AV6"/>
                             <constraint firstItem="mzC-ma-cwn" firstAttribute="centerY" secondItem="9jD-eV-IgQ" secondAttribute="centerY" id="rOm-GT-qPR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" systemItem="downloads" id="T2i-pb-pVd"/>
                     <connections>
-                        <outlet property="label" destination="jzv-gd-Y0g" id="FEE-h3-IWp"/>
                         <outlet property="pickerView" destination="mzC-ma-cwn" id="Hon-nN-3Dm"/>
                     </connections>
                 </viewController>
@@ -147,9 +139,6 @@
         </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

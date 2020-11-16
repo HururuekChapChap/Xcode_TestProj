@@ -35,8 +35,8 @@ class ViewController: UIViewController {
         }
         
         //ViewDidLoad() forcly
-        let vc = storyboard?.instantiateViewController(identifier: "SecondViewController") as! SecondViewController
-        vc.loadViewIfNeeded()
+//        let vc = storyboard?.instantiateViewController(identifier: "SecondViewController") as! SecondViewController
+//        let _ = vc.view
         
     }
     
