@@ -32,4 +32,4 @@ see my Studied trace and Learn and share!
 
 + Notification Tutorial : https://hururuek-chapchap.tistory.com/147
 
-+ Local Notification Tutorial : https://hururuek-chapchap.tistory.com/148 || 
++ Local Notification Tutorial : https://hururuek-chapchap.tistory.com/148 || https://hururuek-chapchap.tistory.com/149
