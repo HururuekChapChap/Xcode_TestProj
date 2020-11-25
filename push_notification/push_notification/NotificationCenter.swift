@@ -51,12 +51,16 @@ class NotificationCenter {
     func CategoryNotification(input : String){
         
         let content = UNMutableNotificationContent()
+        
+        // Action 카테고리 이름
         let userActions = "User Actions"
         
         content.title = "\(input)"
         content.body = "\(input) show to you"
         content.sound = UNNotificationSound.default
         content.badge = 1
+        
+        // Action 카테고리 등록
         content.categoryIdentifier = userActions
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
@@ -68,14 +72,18 @@ class NotificationCenter {
                        print("Error \(error.localizedDescription)")
                    }
                }
-               
+       
+        // Snooze Action 추가
         let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
+        // Delete Action 추가 wiht 빨간색 .destructive
         let deleteAction = UNNotificationAction(identifier: "Delete", title: "Delete", options: [.destructive])
+        
+        // 카테고리 서류 작성
         let category = UNNotificationCategory(identifier: userActions,
                                                      actions: [snoozeAction, deleteAction],
                                                      intentIdentifiers: [],
                                                      options: [])
-        
+        // 카테고리 등록
         notificationCenter.setNotificationCategories([category])
         
     }

@@ -45,11 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
+    //위임자 설정
     func setUNUserNotificationDelegate(){
         notification.notificationCenter.delegate = self
     }
     
-    
+    //ForeGround에서 작동 시키는 방법
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         completionHandler([.list,.sound,.banner])
@@ -57,6 +58,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
     
     
+    //눌렀을 때, 특정한 활동을 수행 할 수 있도록 하기
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
