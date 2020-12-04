@@ -17,13 +17,14 @@ class ViewController: UIViewController {
         
         var flag : Bool = false
         
-        let temp = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { [weak self] (Timer) in
+        let temp = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { [weak self] (Timer) in
             self?.colorView.backgroundColor = self?.colorList.randomElement()
             
             if flag {
             
                 UIView.animate(withDuration: 1) {
                     self?.fireButton.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                    self?.fireButton.setTitleColor(.magenta, for: .normal)
                 }
                 
                 flag = false
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
                 
                 UIView.animate(withDuration: 1) {
                     self?.fireButton.transform = .identity
+                    self?.fireButton.setTitleColor(.link, for: .normal)
                 }
                 
                 flag = true
