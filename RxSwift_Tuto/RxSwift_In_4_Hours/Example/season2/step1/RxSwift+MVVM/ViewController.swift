@@ -88,7 +88,7 @@ class ViewController: UIViewController {
     //그리고 onCompleted()에서는 모든 과정이 끝마지면 자동적으로 종료되도록 한다.
     //마지막에 create()의 반환은 Disposable이라는 것 잊지않는다.
     
-    func downloadJson(_ url : String) -> Observable<String>{
+    func downloadJsonForTest(_ url : String) -> Observable<String>{
         //(RxSwift.AnyObserver<Self.Element>) -> RxSwift.Disposable) -> RxSwift.Observable<Self.Element>
         return Observable.create() { emitter in
             
@@ -124,6 +124,43 @@ class ViewController: UIViewController {
         return Observable.from(["Hello World", "ChapChap"])
     }
     
+//    RxSwift 생명주기
+//    Create
+//    Subscribe
+//    onNext
+//    -----------끝----------
+//    onCompleted / onError
+//    Disposed
+
+    
+    func downloadJson(_ url : String) -> Observable<String>{
+        
+        return Observable.create { emitter in
+            
+            let url = URL(string: url)!
+            
+          let task =  URLSession.shared.dataTask(with: url) { (data, _, err) in
+                
+                if let err = err {
+                    print("Error")
+                    emitter.onError(err)
+                    return
+                }
+                
+                guard let dta = data , let json = String(data: dta, encoding: .utf8) else {
+                    print("Has error in data")
+                    return
+                }
+                emitter.onNext(json)
+                emitter.onCompleted()
+                
+            }
+            
+            task.resume()
+            
+            return Disposables.create()
+        }
+    }
     
     // MARK: SYNC
 
@@ -147,33 +184,80 @@ class ViewController: UIViewController {
 //            self.setVisibleWithAnimation(self.activityIndicator, false)
 //        }
         
-        var result : Observable<String> = downloadJson(MEMBER_LIST_URL)
+//        var result : Observable<String> = downloadJsonForTest(MEMBER_LIST_URL)
         
-        result = downloadJsonWithJust(MEMBER_LIST_URL)
+//        result = downloadJsonWithJust(MEMBER_LIST_URL)
         
-        let test : Observable<[String]> = downloadJsonWithJustArray(MEMBER_LIST_URL)
+//        let test : Observable<[String]> = downloadJsonWithJustArray(MEMBER_LIST_URL)
         
-        result = downloadJsonWithFrom(MEMBER_LIST_URL)
+//        result = downloadJsonWithFrom(MEMBER_LIST_URL)
+            
+
+        let result : Observable<String> = downloadJson(MEMBER_LIST_URL)
+
+//        let disposable = result.subscribe({ event in
+//
+//            switch event {
+//
+//            case .next(let result):
+////                print(result)
+//                DispatchQueue.main.async {
+//                    self.editView.text = result
+//                    self.setVisibleWithAnimation(self.activityIndicator, false)
+//                }
+//
+//            case .error(_):
+//                print("Got Error")
+//                break
+//            case .completed:
+//                print("Yes Completed")
+//                break
+//            }
+//
+//        })
         
-        let disposable = result.subscribe({ event in
-                
+        //sugur라고 불린다 이런 API를
+        result.observeOn(MainScheduler.instance) // operator라고 부른다. MainThread에서 작동시킨다
+            .subscribe(onNext: {json in
+                self.editView.text = json
+                self.setVisibleWithAnimation(self.activityIndicator, false)
+            })
+        
+        
+        result.map { (json) -> Int in
+            return json.count
+        }
+        .filter { (result) -> Bool in
+            return result > 0
+        }
+        // 맨위의 작업을 정해준다. 따라서 맨 처음 map은 background에서 작업을 하게 되고
+        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .default))
+        .map({ (result) -> String in
+            return String(result)
+        })
+        //이 부분 부터 MainThread에서 작동한다.
+        .observeOn(MainScheduler.instance)
+        .subscribe { (event) in
+            
             switch event {
             
-            case .next(let result):
-                print(result)
-                self.editView.text = result
+            case .next(let json):
+                self.editView.text = json
                 self.setVisibleWithAnimation(self.activityIndicator, false)
             case .error(_):
                 break
             case .completed:
                 break
             }
-            
-        })
-      
-        //Subscrible의 작업이 모두 마치고 나면 종료 시킨다.
-        disposable.dispose()
+        }
         
+            
+        
+
+        //Subscrible의 작업이 모두 마치고 나면 종료 시킨다. 따라서 작업이 종료 되기 전에 이 코드를 쓰면
+        //작업 수행이 되지 않는다.
+//        disposable.dispose()
+
         
         
         
