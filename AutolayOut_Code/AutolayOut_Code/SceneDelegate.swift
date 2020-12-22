@@ -20,8 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-        let vc = UIViewController()
-        vc.view.backgroundColor = .purple
+        let vc = SwipeViewController()
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
         
