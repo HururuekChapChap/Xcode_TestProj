@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewController: UIViewController {
+class DynamicViewController: UIViewController {
     
     let scrollView : UIScrollView = {
         let scrollView = UIScrollView()

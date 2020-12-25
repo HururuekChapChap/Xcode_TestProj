@@ -32,8 +32,8 @@ class ViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             
-            let nextView = TableViewController()
-            
+            let nextView = UINavigationController(rootViewController: TableViewController())
+            nextView.navigationBar.prefersLargeTitles = true
             nextView.modalTransitionStyle = .crossDissolve
             nextView.modalPresentationStyle = .fullScreen
             self.present(nextView, animated: true, completion: nil)
