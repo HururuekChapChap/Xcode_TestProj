@@ -29,6 +29,7 @@ class dataViewCell : TableViewCell {
     let cellLabel : UILabel = {
         let label = UILabel()
         label.text = "Hello world"
+        label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textColor = .brown
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false

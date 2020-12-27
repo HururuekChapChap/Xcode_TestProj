@@ -4,8 +4,14 @@
         <attribute name="age" optional="YES" attributeType="String"/>
         <attribute name="birth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="todoList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Todo" inverseName="master" inverseEntity="Todo"/>
+    </entity>
+    <entity name="Todo" representedClassName="Todo" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="master" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="todoList" inverseEntity="Person"/>
     </entity>
     <elements>
-        <element name="Person" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="Person" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Todo" positionX="-63" positionY="9" width="128" height="59"/>
     </elements>
 </model>

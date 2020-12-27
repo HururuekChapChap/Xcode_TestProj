@@ -43,6 +43,7 @@ class TableViewController: UIViewController {
         configureTableView()
         setTableViewDeleate()
         configureNavibtn()
+        fetchItems()
     }
     
     @objc private func plusBtn(){
@@ -184,9 +185,14 @@ extension TableViewController :  UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let items = items else {return UITableViewCell()}
+        
         let cell = maintableView.dequeueReusableCell(withIdentifier: TableViewCell.dataViewCell) as! dataViewCell
         
-        cell.cellLabel.text = "Hello World \(indexPath.row)"
+        let item = items[indexPath.row]
+        
+        cell.cellLabel.text = item.name
         
         return cell
     }
@@ -195,6 +201,127 @@ extension TableViewController :  UITableViewDelegate , UITableViewDataSource {
         guard let navigationHeight = navigationController?.navigationBar.frame.height else {return}
         
         changeButtonSize(height: navigationHeight)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let personItem = self.items![indexPath.row]
+        
+        let alert = UIAlertController(title: "Edit Person", message: "Edit Name", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.text = personItem.name
+        }
+        
+        let saveButton = UIAlertAction(title: "Save", style: .default, handler: {_ in
+            
+            let textField = alert.textFields![0]
+            
+//            personItem.name = textField.text
+            
+            let newTodo = Todo(context: self.context)
+            newTodo.name = textField.text
+            
+            
+            personItem.addToTodoList([newTodo])
+            
+            do{
+                try self.context.save()
+            }
+            catch (let error){
+                print( "Update Data Error :\(error.localizedDescription)")
+                self.context.rollback()
+            }
+            
+            self.fetchItems()
+            
+        })
+        
+        alert.addAction(saveButton)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let delete = UIContextualAction(style: .destructive, title: "내부 1번 삭제") { (_, _, _) in
+            
+            let personToRemove = self.items![indexPath.row]
+            
+            if let item = personToRemove.todoList?.allObjects as? [Todo] , !item.isEmpty{
+            
+                self.context.delete(item[0])
+                
+                do{
+                    try self.context.save()
+                }
+                catch (let error){
+                    print( "Delete Data Error :\(error.localizedDescription)")
+                }
+                    
+                
+                
+                self.fetchItems()
+            }
+            
+        }
+        
+        return UISwipeActionsConfiguration(actions: [delete])
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let delete = UIContextualAction(style: .normal, title: "삭제") { (action, view, nil) in
+                
+            let personToRemove = self.items![indexPath.row]
+            
+            self.context.delete(personToRemove)
+            
+            do{
+                try self.context.save()
+            }
+            catch (let error){
+                print( "Delete Data Error :\(error.localizedDescription)")
+            }
+            
+            self.fetchItems()
+            
+            
+        }
+        
+        delete.backgroundColor = .systemRed
+        
+        let showList = UIContextualAction(style : .normal, title : "내용출력"){ (_,_,_) in
+            
+            let personInfo = self.items![indexPath.row]
+            
+            if let list = personInfo.todoList?.allObjects as? [Todo] , !list.isEmpty{
+                
+                print("Not empty")
+                
+                for item in list{
+                    print(item.name!)
+                }
+                
+                
+            }
+            else{
+                print("It's empty")
+            }
+            
+        }
+        
+        showList.backgroundColor = .systemBlue
+        
+        let actionConfigure = UISwipeActionsConfiguration(actions: [delete, showList])
+        actionConfigure.performsFirstActionWithFullSwipe = false
+        
+        return actionConfigure
+        
+        
     }
     
 }
