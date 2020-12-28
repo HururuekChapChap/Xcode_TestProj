@@ -25,6 +25,9 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
+    let dataControl = coreDataControl.shared
+    var messages : [Message]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +36,12 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view.
         setCollectionView()
         setCollectionViewLayout()
+        dataControl.saveSomeMessage()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        messages = dataControl.getAllMessages()
     }
 
 }
@@ -40,7 +49,7 @@ class MainViewController: UIViewController {
 extension MainViewController {
     private func setCollectionViewLayout(){
         
-        mainCollectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewCell.cellName)
+        mainCollectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: BaseCell.cellName)
         
         view.addSubview(mainCollectionView)
         
@@ -62,16 +71,28 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return messages?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.cellName, for: indexPath) as! MainCollectionViewCell
+        guard let messages = messages else {return UICollectionViewCell()}
         
+        let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: BaseCell.cellName, for: indexPath) as! MainCollectionViewCell
+        
+        
+        cell.message = messages[indexPath.row]
 //        cell.backgroundColor = .red
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let nextVC = ChatViewController()
+        nextVC.friend = messages![indexPath.item].chat_friend
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     

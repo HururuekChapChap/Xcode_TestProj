@@ -10,6 +10,9 @@ import UIKit
 
 class BaseCell : UICollectionViewCell {
     
+    static let cellName : String = "MainCollectionViewCell"
+    static let chatName : String = "ChatCollectionViewCell"
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -26,8 +29,6 @@ class BaseCell : UICollectionViewCell {
 }
 
 class MainCollectionViewCell: BaseCell {
-    
-    static let cellName : String = "MainCollectionViewCell"
     
     lazy var imageView : UIImageView = {
        
@@ -86,6 +87,14 @@ class MainCollectionViewCell: BaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    var message : Message? {
+        didSet{
+            nameLabel.text = message!.chat_friend?.name
+            messageLabel.text = message!.detail
+            timeLabel.text = changeDateFormat(date: message!.date!)
+        }
+    }
 
     override func setupView() {
         backgroundColor = .white
@@ -95,6 +104,13 @@ class MainCollectionViewCell: BaseCell {
         setupNameLabel()
         setupMessageLabel()
         setupTimeLabel()
+    }
+    
+    private func changeDateFormat(date : Date) -> String{
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = "hh:mm"
+        
+        return dateformat.string(from: date)
     }
     
 }
