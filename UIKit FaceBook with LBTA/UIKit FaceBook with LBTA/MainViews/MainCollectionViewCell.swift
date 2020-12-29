@@ -30,6 +30,16 @@ class BaseCell : UICollectionViewCell {
 
 class MainCollectionViewCell: BaseCell {
     
+    override var isHighlighted: Bool {
+        didSet{
+            backgroundColor = isHighlighted ? UIColor(red: 0, green: 134/255, blue: 249/255, alpha: 1) : UIColor.white
+            
+            nameLabel.textColor = isHighlighted ? .white : .black
+            messageLabel.textColor = isHighlighted ? .white : .lightGray
+            timeLabel.textColor = isHighlighted ? .white : .black
+        }
+    }
+    
     lazy var imageView : UIImageView = {
        
         let image = UIImage(named: "sorry.png")
@@ -53,7 +63,7 @@ class MainCollectionViewCell: BaseCell {
     
     let containerView : UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -110,6 +120,16 @@ class MainCollectionViewCell: BaseCell {
         let dateformat = DateFormatter()
         dateformat.dateFormat = "hh:mm"
         
+        let timeDiff = Date().timeIntervalSince(date)
+        let aDayTime : TimeInterval = 60 * 60 * 24
+        
+        if timeDiff > aDayTime * 7 {
+            dateformat.dateFormat = "MM/dd/yy"
+        }
+        else if timeDiff > aDayTime {
+            dateformat.dateFormat = "EEE"
+        }
+        
         return dateformat.string(from: date)
     }
     
@@ -160,7 +180,7 @@ extension MainCollectionViewCell {
         
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
+            nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -70),
             nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
             nameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])

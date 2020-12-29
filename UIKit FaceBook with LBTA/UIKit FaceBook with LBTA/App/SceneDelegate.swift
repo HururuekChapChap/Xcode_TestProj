@@ -30,7 +30,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            let vc: MainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainView") as! MainViewController
 //            window.rootViewController = vc
             
-            window.rootViewController = UINavigationController(rootViewController: MainViewController())
+//            window.rootViewController = UINavigationController(rootViewController: MainViewController())
+            
+            window.rootViewController = CustomTabBarController()
             
 //            window.rootViewController = MainViewController()
             self.window = window

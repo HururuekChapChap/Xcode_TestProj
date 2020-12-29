@@ -72,19 +72,26 @@ class coreDataControl {
         
         var newFriend = Friend(context: context)
         newFriend.name = "Hruruek"
-        createMessage(friend: newFriend, pluse: 1.0, detail: "Hello World")
-        createMessage(friend: newFriend, pluse: 1.5, detail: "How are you?")
-        createMessage(friend: newFriend, pluse: 2.0, detail: "I'm Fine")
+        createMessage(friend: newFriend, pluse: 1.0 * 60, detail: "Hello World")
+        createMessage(friend: newFriend, pluse: 1.5 * 60, detail: "How are you?")
+        createMessage(friend: newFriend, pluse: 2.0 * 60, detail: "I'm Fine")
         
         
         newFriend = Friend(context: context)
         newFriend.name = "ChapChap"
-        createMessage(friend: newFriend, pluse: 3.0, detail: "Hello?")
+        createMessage(friend: newFriend, pluse: 3.0 * 60, detail: "Hello?")
         
         newFriend = Friend(context: context)
-        newFriend.name = "Trump"
-        createMessage(friend: newFriend, pluse: 4.0, detail: "Hello?")
+        newFriend.name = "트럼프"
+        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "Your Fire!")
+        
+        newFriend = Friend(context: context)
+        newFriend.name = "이명박"
+        createMessage(friend: newFriend, pluse: -1 * ((60 * 24 * 60) + (60 * 10)), detail: "여러분 이거 다 거짓말")
       
+        newFriend = Friend(context: context)
+        newFriend.name = "박근혜"
+        createMessage(friend: newFriend, pluse: -1 * ((60 * 24 * 60) * 8), detail: "허허허허")
         
     }
     
@@ -111,7 +118,7 @@ class coreDataControl {
     private func createMessage(friend : Friend , pluse : Double , detail : String){
         
         let newMessage = Message(context : context)
-        newMessage.date = Date().addingTimeInterval(pluse * 60)
+        newMessage.date = Date().addingTimeInterval(pluse)
         newMessage.detail = detail
         newMessage.chat_friend = friend
         
