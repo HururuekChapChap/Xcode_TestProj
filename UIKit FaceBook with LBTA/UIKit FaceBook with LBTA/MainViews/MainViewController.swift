@@ -102,6 +102,7 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
 extension MainViewController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         return CGSize(width: mainCollectionView.frame.width, height: 100)
     }
     

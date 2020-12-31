@@ -88,7 +88,25 @@ extension ChatViewController : UICollectionViewDelegate , UICollectionViewDataSo
         
         cell.textView.text = messages![indexPath.item].detail
         
+        if let messageText = messages?[indexPath.item].detail{
+            
+            //그릴 공간
+            let maxSize = CGSize(width: 250, height: 1000)
+            
+            //높이를 기준으로 하겠다.
+            let heightOnFont = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+            let estimatedFrame = NSString(string: messageText).boundingRect(with: maxSize, options: heightOnFont, attributes: [.font: UIFont.systemFont(ofSize: 20)], context: nil)
+            
+            print(maxSize.width , estimatedFrame.width, estimatedFrame.height)
+            cell.bubbleView.frame = CGRect(x: 40 + 12, y: 0, width: estimatedFrame.width + 20, height: estimatedFrame.height + 16)
+        }
+        
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     }
     
 }
@@ -96,6 +114,16 @@ extension ChatViewController : UICollectionViewDelegate , UICollectionViewDataSo
 extension ChatViewController : UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if let messageText = messages?[indexPath.item].detail{
+            //이 공간 안에 최대로 넣어진다면 그 공간에 맞게 그려주게 된다.
+            let maxSize = CGSize(width: 250, height: 1000)
+            let heightOnFont = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+            let estimatedFrame = NSString(string: messageText).boundingRect(with: maxSize, options: heightOnFont, attributes: [.font: UIFont.systemFont(ofSize: 20)], context: nil)
+            
+            return CGSize(width: chatcollectionView.frame.width, height: estimatedFrame.height + 16)
+        }
+        
         return CGSize(width: chatcollectionView.frame.width, height: 200)
     }
     

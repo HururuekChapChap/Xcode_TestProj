@@ -75,6 +75,7 @@ class coreDataControl {
         createMessage(friend: newFriend, pluse: 1.0 * 60, detail: "Hello World")
         createMessage(friend: newFriend, pluse: 1.5 * 60, detail: "How are you?")
         createMessage(friend: newFriend, pluse: 2.0 * 60, detail: "I'm Fine")
+        createMessage(friend: newFriend, pluse: 3.0 * 60, detail: "저도 완전 최곱니다. ㅎ하하ㅏ하하하하하하하ㅏ하핳 Every Thing is 굿굿!! 유노 왓암 셍? 호호 하하 최고다 아오~~!!")
         
         
         newFriend = Friend(context: context)
