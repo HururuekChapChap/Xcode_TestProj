@@ -43,6 +43,12 @@ class MainViewController: UIViewController {
         super.viewDidLayoutSubviews()
         messages = dataControl.getAllMessages()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.tabBar.isHidden = false
+    }
 
 }
 
