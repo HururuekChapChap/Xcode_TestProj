@@ -22,6 +22,8 @@ class ChatViewController: UIViewController {
         }
     }
     
+    let cdControl = coreDataControl.shared
+    
     let chatcollectionView : UICollectionView = {
        
         let flowlayOut = UICollectionViewFlowLayout()
@@ -34,7 +36,7 @@ class ChatViewController: UIViewController {
     
     let messageInputContainerView : UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .lightText
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -48,6 +50,17 @@ class ChatViewController: UIViewController {
         return textField
     }()
     
+    lazy var sendButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("Send", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.addTarget(self, action: #selector(selectBtn), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    var bottomLayoutConstrain : NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +68,14 @@ class ChatViewController: UIViewController {
         //탭바 숨기기
         tabBarController?.tabBar.isHidden = true
         
+        //navigation right button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simulate", style: .plain, target: self, action: #selector(simuateBtn))
+        
         view.backgroundColor = .yellow
         setDelegate()
-        collectionViewAuto()
         setContainerView()
+        collectionViewAuto()
+        setButton()
         setTextField()
         // Do any additional setup after loading the view.
         addKeyBoardNotification()
@@ -67,9 +84,57 @@ class ChatViewController: UIViewController {
         }
     }
     
+    @objc private func simuateBtn(){
+        
+        let tempMess = cdControl.createMessage(friend: friend!, pluse: 0, detail: "Hello World")
+        messages?.append(tempMess)
+        
+        let itemLocation = messages!.count - 1
+        let insertionIndexPath = IndexPath(item: itemLocation, section: 0)
+        
+        //특정한 라인에 아이템 넣는 방법
+        chatcollectionView.insertItems(at: [insertionIndexPath])
+        self.chatcollectionView.scrollToItem(at: insertionIndexPath, at: .bottom, animated: true)
+        
+    }
+    
+    @objc private func selectBtn(){
+        guard let text = inputTextField.text  else {return}
+        
+        print(text)
+        
+        let tempMess = cdControl.createMessage(friend: friend!, pluse: 0, detail: text, isSender: true)
+        messages?.append(tempMess)
+        
+        let itemLocation = messages!.count - 1
+        let insertionIndexPath = IndexPath(item: itemLocation, section: 0)
+        
+        //특정한 라인에 아이템 넣는 방법
+        chatcollectionView.insertItems(at: [insertionIndexPath])
+        self.chatcollectionView.scrollToItem(at: insertionIndexPath, at: .bottom, animated: true)
+        inputTextField.text = ""
+    }
+    
     private func addKeyBoardNotification(){
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    @objc private func keyBoardWillHide(_ noti : Notification){
+        
+        bottomLayoutConstrain?.isActive = false
+        
+        self.bottomLayoutConstrain = messageInputContainerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        
+        UIView.animate(withDuration: 0) {
+            
+            self.bottomLayoutConstrain?.isActive = true
+            
+            self.view.layoutIfNeeded()
+        }
         
     }
     
@@ -78,9 +143,23 @@ class ChatViewController: UIViewController {
         
         if let keyBoardFrame : NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             print( "cgRectVale : " ,keyBoardFrame.cgRectValue)
-            
             print("widht : " ,keyBoardFrame.cgRectValue.width)
             print("height : " ,keyBoardFrame.cgRectValue.height)
+                        
+            bottomLayoutConstrain?.isActive = false
+            
+            UIView.animate(withDuration: 0) {
+                self.bottomLayoutConstrain = self.messageInputContainerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -keyBoardFrame.cgRectValue.height)
+                
+                self.bottomLayoutConstrain?.isActive = true
+                
+                self.view.layoutIfNeeded()
+            } completion: { _ in
+                
+                let indexPathItem = IndexPath(item: self.messages!.count - 1, section: 0)
+                self.chatcollectionView.scrollToItem(at: indexPathItem, at: .bottom, animated: true)
+            }
+
             
         }
     }
@@ -98,7 +177,8 @@ extension ChatViewController {
             chatcollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             chatcollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             chatcollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            chatcollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//            chatcollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            chatcollectionView.bottomAnchor.constraint(equalTo: messageInputContainerView.topAnchor)
         ])
         
         setRegister()
@@ -111,23 +191,39 @@ extension ChatViewController {
     private func setContainerView(){
         view.addSubview(messageInputContainerView)
         
+        bottomLayoutConstrain = messageInputContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        
         NSLayoutConstraint.activate([
             messageInputContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             messageInputContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             messageInputContainerView.heightAnchor.constraint(equalToConstant: 48),
-            messageInputContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            bottomLayoutConstrain!
         ])
     }
     
     private func setTextField(){
         messageInputContainerView.addSubview(inputTextField)
-        
+    
         NSLayoutConstraint.activate([
             inputTextField.leadingAnchor.constraint(equalTo: messageInputContainerView.leadingAnchor, constant: 10),
-            inputTextField.trailingAnchor.constraint(equalTo: messageInputContainerView.trailingAnchor),
+            inputTextField.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor),
             inputTextField.topAnchor.constraint(equalTo: messageInputContainerView.topAnchor),
             inputTextField.bottomAnchor.constraint(equalTo: messageInputContainerView.bottomAnchor)
         ])
+        
+    }
+    
+    private func setButton(){
+        
+        messageInputContainerView.addSubview(sendButton)
+        
+        NSLayoutConstraint.activate([
+            sendButton.topAnchor.constraint(equalTo: messageInputContainerView.topAnchor),
+            sendButton.trailingAnchor.constraint(equalTo: messageInputContainerView.trailingAnchor, constant: -10),
+            sendButton.bottomAnchor.constraint(equalTo: messageInputContainerView.bottomAnchor),
+            sendButton.widthAnchor.constraint(equalToConstant: 50)
+        ])
+        
         
     }
 }
@@ -183,6 +279,10 @@ extension ChatViewController : UICollectionViewDelegate , UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        inputTextField.endEditing(true)
     }
     
 }

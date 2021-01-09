@@ -77,6 +77,14 @@ class coreDataControl {
         createMessage(friend: newFriend, pluse: 2.0 * 60, detail: "I'm Fine")
         createMessage(friend: newFriend, pluse: 3.0 * 60, detail: "저도 완전 최곱니다. ㅎ하하ㅏ하하하하하하하ㅏ하핳 Every Thing is 굿굿!! 유노 왓암 셍? 호호 하하 최고다 아오~~!!")
         createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?", isSender: true)
+        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you? How are you?")
+        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you? How are you?")
+        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you? How are you?", isSender: true)
+        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?", isSender: true)
+        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?")
+        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?", isSender: true)
+        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?", isSender: true)
+        
         
         newFriend = Friend(context: context)
         newFriend.name = "ChapChap"
@@ -116,7 +124,8 @@ class coreDataControl {
         
     }
     
-    private func createMessage(friend : Friend , pluse : Double , detail : String, isSender : Bool = false){
+    @discardableResult
+    func createMessage(friend : Friend , pluse : Double , detail : String, isSender : Bool = false) -> Message{
         
         let newMessage = Message(context : context)
         newMessage.date = Date().addingTimeInterval(pluse)
@@ -133,6 +142,8 @@ class coreDataControl {
             context.rollback()
             print(err.localizedDescription)
         }
+        
+        return newMessage
         
     }
     
