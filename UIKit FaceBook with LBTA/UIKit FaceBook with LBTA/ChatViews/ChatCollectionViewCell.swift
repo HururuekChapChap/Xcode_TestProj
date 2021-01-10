@@ -16,6 +16,7 @@ class ChatCollectionViewCell: BaseCell {
         textView.isScrollEnabled = false
         textView.font = UIFont.systemFont(ofSize: 20)
         textView.text = "Sample Text"
+        textView.textColor = .black
         textView.backgroundColor = .clear
         textView.textAlignment = .center
         textView.translatesAutoresizingMaskIntoConstraints = false

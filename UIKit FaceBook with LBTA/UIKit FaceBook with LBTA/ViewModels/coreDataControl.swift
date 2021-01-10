@@ -13,7 +13,6 @@ class coreDataControl {
     static let shared = coreDataControl()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     func getAllMessages() -> [Message]?{
         
             guard let friends = getAllFriends() else {return nil}
@@ -26,7 +25,7 @@ class coreDataControl {
                     
                 let fetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
                 // 시간이 작은 것(오래된 것)이 먼저 오게 된다
-                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
                 fetchRequest.predicate = NSPredicate(format: "chat_friend.name = %@", friend.name!)
                 fetchRequest.fetchLimit = 1
     //            let items = try context.fetch(Message.fetchRequest())
@@ -72,27 +71,27 @@ class coreDataControl {
         
         var newFriend = Friend(context: context)
         newFriend.name = "Hruruek"
-        createMessage(friend: newFriend, pluse: 1.0 * 60, detail: "Hello World")
-        createMessage(friend: newFriend, pluse: 1.5 * 60, detail: "How are you?")
-        createMessage(friend: newFriend, pluse: 2.0 * 60, detail: "I'm Fine")
-        createMessage(friend: newFriend, pluse: 3.0 * 60, detail: "저도 완전 최곱니다. ㅎ하하ㅏ하하하하하하하ㅏ하핳 Every Thing is 굿굿!! 유노 왓암 셍? 호호 하하 최고다 아오~~!!")
-        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?", isSender: true)
-        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you? How are you?")
-        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you? How are you?")
-        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you? How are you?", isSender: true)
-        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?", isSender: true)
-        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?")
-        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?", isSender: true)
-        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "How are you?", isSender: true)
+        createMessage(friend: newFriend, pluse: -4.0 * 60, detail: "Hello World")
+        createMessage(friend: newFriend, pluse: -3.5 * 60, detail: "How are you?")
+        createMessage(friend: newFriend, pluse: -2.0 * 60, detail: "I'm Fine")
+        createMessage(friend: newFriend, pluse: -1.0 * 60, detail: "저도 완전 최곱니다. ㅎ하하ㅏ하하하하하하하ㅏ하핳 Every Thing is 굿굿!! 유노 왓암 셍? 호호 하하 최고다 아오~~!!")
+        createMessage(friend: newFriend, pluse: -0.8 * 60, detail: "How are you?", isSender: true)
+        createMessage(friend: newFriend, pluse: -0.7 * 60, detail: "How are you? How are you?1")
+        createMessage(friend: newFriend, pluse: -0.6 * 60, detail: "How are you? How are you?2")
+        createMessage(friend: newFriend, pluse: -0.5 * 60, detail: "How are you? How are you?3", isSender: true)
+        createMessage(friend: newFriend, pluse: -0.4 * 60, detail: "How are you?1", isSender: true)
+        createMessage(friend: newFriend, pluse: -0.3 * 60, detail: "How are you?2")
+        createMessage(friend: newFriend, pluse: -0.2 * 60, detail: "How are you?3", isSender: true)
+        createMessage(friend: newFriend, pluse: -0.1 * 60, detail: "How are you?4", isSender: true)
         
         
         newFriend = Friend(context: context)
         newFriend.name = "ChapChap"
-        createMessage(friend: newFriend, pluse: 3.0 * 60, detail: "Hello?")
+        createMessage(friend: newFriend, pluse: -3.0 * 60, detail: "Hello?")
         
         newFriend = Friend(context: context)
         newFriend.name = "트럼프"
-        createMessage(friend: newFriend, pluse: 4.0 * 60, detail: "Your Fire!")
+        createMessage(friend: newFriend, pluse: -4.0 * 60, detail: "Your Fire!")
         
         newFriend = Friend(context: context)
         newFriend.name = "이명박"
