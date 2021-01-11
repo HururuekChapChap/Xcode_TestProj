@@ -2,7 +2,7 @@
 //  Friend+CoreDataProperties.swift
 //  UIKit FaceBook with LBTA
 //
-//  Created by yoon tae soo on 2020/12/28.
+//  Created by yoon tae soo on 2021/01/11.
 //
 //
 
@@ -18,6 +18,7 @@ extension Friend {
 
     @NSManaged public var name: String?
     @NSManaged public var chat_message: NSSet?
+    @NSManaged public var lastMessgae: Message?
 
 }
 

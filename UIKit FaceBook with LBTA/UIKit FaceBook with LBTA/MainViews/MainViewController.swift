@@ -6,11 +6,22 @@
 //
 
 import UIKit
+import CoreData
+
+protocol SendUpdateProtocol : class {
+    func sendUpdated()
+}
 
 
 //Preview와 StoryBoard는 서로 연결 할 수가 없다. ㅋㅋㅋ
-class MainViewController: UIViewController {
-
+class MainViewController: UIViewController , NSFetchedResultsControllerDelegate, SendUpdateProtocol{
+    
+    func sendUpdated() {
+        click()
+    }
+    
+    let dataControl = coreDataControl.shared
+    
     let mainCollectionView : UICollectionView = {
        
         let flowLayOut = UICollectionViewFlowLayout()
@@ -25,23 +36,50 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
-    let dataControl = coreDataControl.shared
+    lazy var fetchResultController : NSFetchedResultsController<Friend> = {
+
+        let fetchRequest : NSFetchRequest<Friend> = Friend.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastMessgae.date", ascending: false)]
+        let fetchResult = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataControl.context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResult.delegate = self
+        return fetchResult
+    }()
+
     var messages : [Message]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //데이터를 performFetch() 이전에 가져와야 한다.
+        dataControl.saveSomeMessage()
         
+        do{
+
+            try fetchResultController.performFetch()
+            print("fetch finish")
+
+        }catch let err{
+            print("Freind Fetch Error" , err.localizedDescription)
+        }
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Button", style: .plain, target: self, action: #selector(click))
         self.navigationItem.title = "Message"
         // Do any additional setup after loading the view.
         setCollectionView()
         setCollectionViewLayout()
-        dataControl.saveSomeMessage()
+        
+        let cnt = fetchResultController.sections?[0].numberOfObjects
+        if let item = fetchResultController.sections?[0].objects as? [Friend] {
+            print(cnt! , item[0].name!)
+        }
+        else{
+            print("Not type")
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        messages = dataControl.getAllMessages()
+//        messages = dataControl.getAllMessages()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +87,23 @@ class MainViewController: UIViewController {
         
         tabBarController?.tabBar.isHidden = false
     }
-
+    
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        <#code#>
+//    }
+    
+    @objc private func click(){
+//        mainCollectionView.reloadData()
+        
+        do {
+            try fetchResultController.performFetch()
+            
+            mainCollectionView.reloadData()
+        }
+        catch let err{
+            print(err.localizedDescription)
+        }
+    }
 }
 
 extension MainViewController {
@@ -77,17 +131,25 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messages?.count ?? 0
+        
+        return fetchResultController.sections?[0].numberOfObjects ?? 0
+        
+//        return messages?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let messages = messages else {return UICollectionViewCell()}
+        let test = fetchResultController.object(at: indexPath)
+        
+//        guard let messages = messages else {return UICollectionViewCell()}
         
         let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: BaseCell.cellName, for: indexPath) as! MainCollectionViewCell
         
+//        print(test.lastMessage)
         
-        cell.message = messages[indexPath.row]
+        cell.message = test.lastMessgae
+        
+//        cell.message = messages[indexPath.row]
 //        cell.backgroundColor = .red
         
         return cell
@@ -95,8 +157,14 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let test = fetchResultController.object(at: indexPath)
+        
         let nextVC = ChatViewController()
-        nextVC.friend = messages![indexPath.item].chat_friend
+//        nextVC.friend = messages![indexPath.item].chat_friend
+        nextVC.friend = test
+        
+        //너의 일을 내가 대신 해줄게
+        nextVC.delegate = self
         
         navigationController?.pushViewController(nextVC, animated: true)
     }

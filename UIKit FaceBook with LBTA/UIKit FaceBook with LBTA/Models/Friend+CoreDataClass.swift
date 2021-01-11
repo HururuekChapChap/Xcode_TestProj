@@ -2,7 +2,7 @@
 //  Friend+CoreDataClass.swift
 //  UIKit FaceBook with LBTA
 //
-//  Created by yoon tae soo on 2020/12/28.
+//  Created by yoon tae soo on 2021/01/11.
 //
 //
 

@@ -24,8 +24,10 @@ class ChatViewController: UIViewController , NSFetchedResultsControllerDelegate{
     
     let cdControl = coreDataControl.shared
     
+    weak var delegate : SendUpdateProtocol?
+    
     lazy var fetchResultController : NSFetchedResultsController<Message> = {
-       
+
         let fetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
         let sort = NSSortDescriptor(key: "date", ascending: true)
         let filter = NSPredicate(format: "chat_friend.name = %@", self.friend!.name!)
@@ -35,6 +37,7 @@ class ChatViewController: UIViewController , NSFetchedResultsControllerDelegate{
         fetchResult.delegate = self
         return fetchResult
     }()
+
     
     var blockOperations : [BlockOperation] = []
     
@@ -48,6 +51,9 @@ class ChatViewController: UIViewController , NSFetchedResultsControllerDelegate{
             }))
             
             print(newIndexPath!)
+            
+            delegate?.sendUpdated()
+            
 //            chatcollectionView.insertItems(at: [newIndexPath!])
 //            chatcollectionView.scrollToItem(at: newIndexPath!, at: .bottom, animated: true)
         }
@@ -118,15 +124,15 @@ class ChatViewController: UIViewController , NSFetchedResultsControllerDelegate{
         
         do{
             try fetchResultController.performFetch()
-            print("fetchResultController section count : ",fetchResultController.sections?.count)
-            print("fetchResultController section[0] count : ",fetchResultController.sections?[0].numberOfObjects)
+//            print("fetchResultController section count : ",fetchResultController.sections?.count)
+//            print("fetchResultController section[0] count : ",fetchResultController.sections?[0].numberOfObjects)
             
             // Message에 해당하는 모든 값을 다 가져옴 따라서 NSPredicate로 filtering을 해줘야한다. (NSPredicate를 안해줬을 때)
         }
         catch let err{
             print(err)
         }
-        
+
         //탭바 숨기기
         tabBarController?.tabBar.isHidden = true
         
@@ -358,7 +364,7 @@ extension ChatViewController : UICollectionViewDelegate , UICollectionViewDataSo
             }
             // 내가 보내는 것일 때
             else{
-                print(temp_message.detail, temp_message.isSender , indexPath.item)
+//                print(temp_message.detail, temp_message.isSender , indexPath.item)
                 cell.bubbleView.frame = CGRect(x: chatcollectionView.frame.width - estimatedFrame.width - 23, y: 0, width: estimatedFrame.width + 20, height: estimatedFrame.height + 16)
                 
                 cell.bubbleView.backgroundColor = .red

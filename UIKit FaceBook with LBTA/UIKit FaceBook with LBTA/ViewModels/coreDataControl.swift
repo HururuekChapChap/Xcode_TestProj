@@ -22,7 +22,7 @@ class coreDataControl {
             friends.forEach { (friend) in
                 
                 do{
-                    
+          
                 let fetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
                 // 시간이 작은 것(오래된 것)이 먼저 오게 된다
                 fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
@@ -90,16 +90,17 @@ class coreDataControl {
         createMessage(friend: newFriend, pluse: -3.0 * 60, detail: "Hello?")
         
         newFriend = Friend(context: context)
-        newFriend.name = "트럼프"
+        newFriend.name = "우리"
         createMessage(friend: newFriend, pluse: -4.0 * 60, detail: "Your Fire!")
         
         newFriend = Friend(context: context)
-        newFriend.name = "이명박"
+        newFriend.name = "모두"
         createMessage(friend: newFriend, pluse: -1 * ((60 * 24 * 60) + (60 * 10)), detail: "여러분 이거 다 거짓말")
       
         newFriend = Friend(context: context)
-        newFriend.name = "박근혜"
+        newFriend.name = "함께"
         createMessage(friend: newFriend, pluse: -1 * ((60 * 24 * 60) * 8), detail: "허허허허")
+        
         
     }
     
@@ -133,6 +134,7 @@ class coreDataControl {
         newMessage.isSender = isSender
         
         friend.addToChat_message(newMessage)
+        friend.lastMessgae = newMessage
         
         do{
             try context.save()
