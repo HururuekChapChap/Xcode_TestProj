@@ -57,6 +57,7 @@ class ChatViewController: UIViewController , NSFetchedResultsControllerDelegate{
 //            chatcollectionView.insertItems(at: [newIndexPath!])
 //            chatcollectionView.scrollToItem(at: newIndexPath!, at: .bottom, animated: true)
         }
+        
     }
     
     //CoreData에 변화가 감지 됐을 때, 작동하는 것
