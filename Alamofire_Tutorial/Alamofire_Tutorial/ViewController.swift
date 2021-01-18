@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     //naver.com
     //hou**4***
     
+    let name : String = ""
+    let number : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
