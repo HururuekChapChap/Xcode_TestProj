@@ -9,9 +9,32 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let samepleView : UIView = {
+        
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
+        
+        
+        return view
+    }()
+    
+    let imageView : UIImageView = {
+       
+        let image = #imageLiteral(resourceName: "ic_photo_camera")
+        let imageView = UIImageView(image: image)
+        
+        return imageView
+        
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        
+        
     }
 
 

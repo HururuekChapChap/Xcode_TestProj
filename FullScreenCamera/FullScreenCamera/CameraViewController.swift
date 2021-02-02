@@ -22,8 +22,8 @@ class CameraViewController: UIViewController {
     let sessionQueue = DispatchQueue(label: "session Queue")
     //입력으로 촬영된 영상이나 사진의 세션결과를 반환해주는 것 또는 하드웨어의 구체적인 특징을 설정해주는 것
     //DiscoverySession이 구체적인 설정을 해주는 것
-    //deviceTypes : [카메라의 특징 설정] , mediaType : 결과물의 타입 - 영상 position : 카메라의 앞이냐 뒤냐 설정
-    let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera , .builtInTrueDepthCamera , .builtInUltraWideCamera , .builtInWideAngleCamera , .builtInTripleCamera], mediaType: .video, position: .back)
+    //deviceTypes : [카메라의 특징 설정] , mediaType : 결과물의 타입 - 영상 position : 카메라의 앞만 사용 설정 , 뒤만 사용 , 모두 사용
+    let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera , .builtInTrueDepthCamera , .builtInUltraWideCamera , .builtInWideAngleCamera , .builtInTripleCamera], mediaType: .video, position: .unspecified)
 
     @IBOutlet weak var photoLibraryButton: UIButton!
     @IBOutlet weak var previewView: PreviewView!
@@ -55,6 +55,7 @@ class CameraViewController: UIViewController {
         
     }
     
+    //UI 설정
     func setupUI() {
         
         photoLibraryButton.layer.cornerRadius = 10
@@ -74,15 +75,88 @@ class CameraViewController: UIViewController {
     @IBAction func switchCamera(sender: Any) {
         // TODO: 카메라는 1개 이상이어야함
         
+        // 핸드폰에 달려있는 카메라의 갯수
+        if videoDeviceDiscoverySession.devices.count < 1 {
+            return}
         
         // TODO: 반대 카메라 찾아서 재설정
+        
+        sessionQueue.async {
+            //현재 비디오 촬영 카메라가 무엇인가?
+            let currentVideoDevice = self.videoDeviceInput.device
+            //그리고 그 카메라의 앞 뒤 전후가 어떻게 되는가?
+            let currentPosition = currentVideoDevice.position
+            //나를 보고 있는 카메라
+            let isFront = currentPosition == .front
+            //바꿀 포지션 - 앞이였다면 뒤로 보내고 뒤였다면 앞으로 보내고
+            let preferredPosition : AVCaptureDevice.Position = isFront ? .back : .front
+            
+            //이제 그 해당하는 것 들 중에 해당하는 것을 해줄 거임
+            let devices = self.videoDeviceDiscoverySession.devices
+            //찾아주는 과정
+            let newVideoDevice : AVCaptureDevice? = devices.first(where: { (device) -> Bool in
+                return device.position == preferredPosition
+            })
+            
+//            print(isFront , preferredPosition == .back)
+            
+            //이제 카메라를 변경 해준다.
+            
+            if let newDevice = newVideoDevice{
+                
+                do{
+                
+                    //디바이스 장치를 가져온다.
+                    let newVideoDeviceInput = try AVCaptureDeviceInput(device: newDevice)
+                    //카메라 세션을 변경을 해줄 것 임을 알려준다.
+                    self.captureSession.beginConfiguration()
+                    
+                    //따라서 이렇게 미리 있는 세션을 제거 해준 다음에 넣어줘야 한다.
+                    self.captureSession.removeInput(self.videoDeviceInput)
+                    
+                    //그리고 변경을 해준다. - 세션이 이미 하나 들어가 있으면 들어 갈 수가 없다.
+                    if self.captureSession.canAddInput(newVideoDeviceInput){
+                        self.captureSession.addInput(newVideoDeviceInput)
+                        self.videoDeviceInput = newVideoDeviceInput
+                        
+                        //카메라 아이콘 변경
+                        DispatchQueue.main.async {
+                            self.updateSwitchCameraIcon(position: preferredPosition)
+                        }
+                        
+                    }
+                    else{
+                        self.captureSession.addInput(self.videoDeviceInput)
+                    }
+                    
+                    self.captureSession.commitConfiguration()
+                
+                }
+                catch{
+                    print("Error occured \(error.localizedDescription)")
+                }
+                
+            }
+            
+            
+            
+        }
         
     }
     
     func updateSwitchCameraIcon(position: AVCaptureDevice.Position) {
         // TODO: Update ICON
         
-        
+        switch position {
+        case .front:
+            let image = #imageLiteral(resourceName: "ic_camera_front")
+            switchButton.setImage(image, for: .normal)
+        case .back:
+            let image = #imageLiteral(resourceName: "ic_camera_rear")
+            switchButton.setImage(image, for: .normal)
+        default:
+            break
+        }
     }
     
     @IBAction func capturePhoto(_ sender: UIButton) {
@@ -122,7 +196,7 @@ extension CameraViewController {
         
         do{
             //위에서 찾은 camera 디바이스에서 이제 세션으로 변경해준다.
-            let videoDeviceInput = try AVCaptureDeviceInput(device: camera)
+            videoDeviceInput = try AVCaptureDeviceInput(device: camera)
             
             //위에서 얻은 세션을 진짜 카메라 세션에 넣을 수 있는가? 확인하고
             if captureSession.canAddInput(videoDeviceInput) {
@@ -164,26 +238,26 @@ extension CameraViewController {
         // TODO: session Start
         
         //내일 이 부분 빼도 되는지 확인@@
-        sessionQueue.async {
+//        sessionQueue.async {
             
             if !self.captureSession.isRunning{
                 self.captureSession.startRunning()
             }
         
-        }
+//        }
         
     }
     
     func stopSession() {
         // TODO: session Stop
         
-        sessionQueue.async {
+//        sessionQueue.async {
             
             if self.captureSession.isRunning{
                 self.captureSession.stopRunning()
             }
         
-        }
+//        }
         
     }
 }
