@@ -10,9 +10,27 @@ import Foundation
 
 
 class InterfaceController: WKInterfaceController {
-
+    
+    @IBOutlet var myButton : WKInterfaceButton!
+    
+    
+    @IBOutlet var myTable : WKInterfaceTable!
+    
     override func awake(withContext context: Any?) {
         // Configure interface objects here.
+        
+        let array = ["Apples", "Oranges", "Grapes", "Bananase","Mangos"]
+        
+        //how many cell will show
+        myTable.setNumberOfRows(5, withRowType: "Cell")
+        
+        //Create Table label
+        for (index, fruit) in array.enumerated() {
+            guard let row = myTable.rowController(at: index) as? RowController else {continue}
+            
+            row.myLabel.setText(fruit)
+            
+        }
     }
     
     override func willActivate() {
@@ -23,4 +41,10 @@ class InterfaceController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
     }
 
+    @IBAction func buttonTapped(){
+        
+        myButton.setTitle("Tapped")
+        
+    }
+    
 }
