@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17701" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fPy-QC-GcE">
+    <device id="watch40"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17500"/>
+    </dependencies>
+    <scenes>
+        <!--InterfaceController-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller identifier="InterfaceController" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="AppleWatchExample_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="cjN-EA-93c">
+                            <items>
+                                <label alignment="left" text="Label" id="PpZ-X3-0dK"/>
+                                <label alignment="left" text="Label" id="kVj-Sn-4bY"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="center" spacing="0.0" id="0WQ-8e-0hZ">
+                            <items>
+                                <button width="40" height="40" alignment="left" backgroundImage="rewind-button" id="Hlt-LO-GWv">
+                                    <connections>
+                                        <action selector="buttonRewindTap" destination="AgC-eL-Hgc" id="aTY-Sv-raa"/>
+                                    </connections>
+                                </button>
+                                <button width="40" height="40" alignment="center" backgroundImage="play" id="PUI-FL-dfI">
+                                    <variation key="device=watch42mm" height="42" width="42"/>
+                                    <connections>
+                                        <action selector="buttonPlayTap" destination="AgC-eL-Hgc" id="E1l-Kn-pdG"/>
+                                    </connections>
+                                </button>
+                                <button width="40" height="40" alignment="right" backgroundImage="fast-forward" id="kmm-CV-Xdf">
+                                    <connections>
+                                        <action selector="buttonForwardTap" destination="AgC-eL-Hgc" id="ZKN-cG-Qhc"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <slider width="1" alignment="left" value="1" maximum="5" steps="5" id="rAu-c2-eqK">
+                            <connections>
+                                <action selector="sliderAction:" destination="AgC-eL-Hgc" id="Lqt-43-sVr"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Delete" id="jOT-9i-UKR">
+                            <color key="backgroundColor" red="1" green="0.1114092741" blue="0.034362980039999998" alpha="0.8980392157" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="deleteTap" destination="AgC-eL-Hgc" id="zSE-iR-y0m"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="buttonForward" destination="kmm-CV-Xdf" id="8d4-bC-OA2"/>
+                        <outlet property="buttonPlay" destination="PUI-FL-dfI" id="wd2-J9-MFe"/>
+                        <outlet property="buttonRewid" destination="Hlt-LO-GWv" id="IUe-FH-lcS"/>
+                        <outlet property="labelFinishedTime" destination="PpZ-X3-0dK" id="EPq-LJ-1Mm"/>
+                        <outlet property="labelTaksName" destination="kVj-Sn-4bY" id="W9l-6w-kKb"/>
+                        <outlet property="sliderVolume" destination="rAu-c2-eqK" id="ZnM-73-fa3"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="458" y="334"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                        <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="AppleWatchExample_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="528" y="1008"/>
+        </scene>
+        <!--Table Interface Controller-->
+        <scene sceneID="bJ6-Sa-nhg">
+            <objects>
+                <controller id="fPy-QC-GcE" customClass="TableInterfaceController" customModule="AppleWatchExample_WatchKit_Extension">
+                    <items>
+                        <table alignment="left" id="hNg-8z-wQq">
+                            <items>
+                                <tableRow identifier="table" id="e7w-u8-RP4" customClass="TaskRowCell" customModule="AppleWatchExample_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="2R6-Rf-Epq">
+                                        <items>
+                                            <group width="0.80000000000000004" alignment="left" layout="vertical" id="1Vj-vi-z81">
+                                                <items>
+                                                    <label alignment="left" text="20:30" id="1kA-mx-Y8e"/>
+                                                    <label alignment="left" text="Go to sleep" id="GzA-1s-bbJ"/>
+                                                </items>
+                                            </group>
+                                            <imageView width="0.20000000000000001" height="0.90000000000000002" alignment="right" verticalAlignment="center" image="pause" id="nTA-nf-DDZ">
+                                                <color key="tintColor" red="0.86834077160000001" green="0.096741215059999996" blue="0.029838776599999998" alpha="0.8980392157" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </imageView>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="imageViewTask" destination="nTA-nf-DDZ" id="fF5-p5-nWn"/>
+                                        <outlet property="labelFinishedTime" destination="1kA-mx-Y8e" id="QKx-Dg-Izi"/>
+                                        <outlet property="labelTaskName" destination="GzA-1s-bbJ" id="fhe-L2-BIM"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="hNg-8z-wQq" id="OWV-KU-SY0"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="198" y="334"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="Niz-AI-uX2">
+            <objects>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="AppleWatchExample_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="528" y="643"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fast-forward" width="256" height="256"/>
+        <image name="pause" width="256" height="256"/>
+        <image name="play" width="256" height="256"/>
+        <image name="rewind-button" width="256" height="256"/>
+    </resources>
+</document>
