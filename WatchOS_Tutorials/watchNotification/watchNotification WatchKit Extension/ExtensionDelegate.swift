@@ -120,7 +120,6 @@ extension ExtensionDelegate : UNUserNotificationCenterDelegate{
                     IC.pushController(withName: "Second", context: nil)
                     
                     
-                    
                 }
         
         
