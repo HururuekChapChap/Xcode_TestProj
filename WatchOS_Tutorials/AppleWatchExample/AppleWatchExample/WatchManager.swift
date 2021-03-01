@@ -12,7 +12,7 @@ class WatchManager : NSObject{
     
     static let shared : WatchManager = WatchManager()
     
-    var watchSession : WCSession?
+    var watchSession : WCSession? = WCSession.default
     
     override init(){
         
@@ -23,9 +23,11 @@ class WatchManager : NSObject{
             return
         }
         
-        watchSession = WCSession.default
+//        watchSession = WCSession.default
         watchSession?.delegate = self
         watchSession?.activate()
+        print("watchSession?.isPaired : \(watchSession?.isPaired)")
+        
         
     }
     
@@ -60,6 +62,8 @@ extension WatchManager : WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         print("received message : \(message)")
+        
+        print("watchSession?.isPaired : \(watchSession?.isPaired)")
     }
 
 }

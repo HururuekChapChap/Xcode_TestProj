@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17701" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17500"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="watchNotification_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <button width="1" alignment="left" title="Notificaion" id="PhU-e6-T47">
+                            <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
+                            <connections>
+                                <action selector="startNotification" destination="AgC-eL-Hgc" id="jCS-TM-I2f"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <color key="backgroundColor" red="0.95719808340000001" green="0.4663786005829994" blue="0.14635151057287266" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="arE-0y-ZPy" kind="relationship" relationship="dynamicNotificationInterface" id="wA5-JC-fcx"/>
+                        <segue destination="j6V-UD-92B" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="JIL-6Q-bvD"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Second-->
+        <scene sceneID="vPK-xu-RR5">
+            <objects>
+                <controller identifier="Second" id="mxo-gv-sMe" customClass="SecondInterfaceController" customModule="watchNotification_WatchKit_Extension">
+                    <color key="backgroundColor" name="AccentColor"/>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="520" y="345"/>
+        </scene>
+        <!--Third-->
+        <scene sceneID="dZD-op-hC2">
+            <objects>
+                <controller identifier="Third" id="54M-gc-BOZ">
+                    <color key="backgroundColor" red="0.44921111130000002" green="0.95719808340000001" blue="0.26402537450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="795" y="345"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="6DI-zd-aXG">
+            <objects>
+                <controller id="arE-0y-ZPy" customClass="NotificationController" customModule="watchNotification_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="520" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="aUY-8h-Mz8">
+            <objects>
+                <controller id="j6V-UD-92B" customClass="NotificationController" customModule="watchNotification_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="520" y="992"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

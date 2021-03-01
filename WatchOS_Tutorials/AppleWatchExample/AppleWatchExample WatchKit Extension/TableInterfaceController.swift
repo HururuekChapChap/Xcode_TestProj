@@ -22,7 +22,7 @@ class TableInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var table : WKInterfaceTable!
     
-    var watchSession : WCSession?
+    var watchSession : WCSession? =  WCSession.default
     
     var tasks : [Task] = [
         
@@ -54,11 +54,14 @@ class TableInterfaceController: WKInterfaceController {
         super.awake(withContext: context)
         
         // Configure interface objects here.
+//        watchSession = WCSession.default
         
-
-        watchSession = WCSession.default
         watchSession?.delegate = self
         watchSession?.activate()
+        
+        watchSession?.sendMessage(["Hello" : "World"], replyHandler: nil, errorHandler: nil)
+        
+        print("watchSession?.isPaired : \(watchSession?.isReachable)")
     }
 
     override func willActivate() {
@@ -66,6 +69,9 @@ class TableInterfaceController: WKInterfaceController {
         super.willActivate()
         
         configureTable()
+        
+        
+        
     }
 
     override func didDeactivate() {
@@ -95,10 +101,19 @@ extension TableInterfaceController : WCSessionDelegate{
         print("watch recevied app context : ", applicationContext)
     }
     
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        print("received data : \(message)")
+        
+        replyHandler(message)
+    }
+    
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         print("received data : \(message)")
         
-        session.sendMessage(message, replyHandler: nil, errorHandler: nil)
+        print("watchSession?.isPaired : \(watchSession?.isReachable)")
+        
+        
+//        session.sendMessage(message, replyHandler: nil, errorHandler: nil)
         
     }
     
